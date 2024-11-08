@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0' // Replace X.Y.Z with the latest version
+        classpath 'com.android.tools.build:gradle:8.1.1' // Replace X.Y.Z with the latest version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
