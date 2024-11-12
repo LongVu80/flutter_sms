@@ -24,13 +24,29 @@ public class SwiftFlutterSmsPlugin: NSObject, FlutterPlugin, UINavigationControl
           )
         )
       #else
+//        if (MFMessageComposeViewController.canSendText()) {
+//          self.result = result
+//          let controller = MFMessageComposeViewController()
+//          controller.body = _arguments["message"] as? String
+//          controller.recipients = _arguments["recipients"] as? [String]
+//          controller.messageComposeDelegate = self
+//          UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
+//        }
         if (MFMessageComposeViewController.canSendText()) {
-          self.result = result
-          let controller = MFMessageComposeViewController()
-          controller.body = _arguments["message"] as? String
-          controller.recipients = _arguments["recipients"] as? [String]
-          controller.messageComposeDelegate = self
-          UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
+            if let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .first(where: {$0.isKeyWindow}),
+                let rootViewController = keyWindow.rootViewController {
+
+                self.result = result
+                let controller = MFMessageComposeViewController()
+                controller.body = _arguments["message"] as? String
+                controller.recipients = _arguments["recipients"] as? [String]
+                controller.messageComposeDelegate = self
+                rootViewController.present(controller, animated: true, completion: nil)
+            }
         } else {
           result(FlutterError(
               code: "device_not_capable",
@@ -67,6 +83,14 @@ public class SwiftFlutterSmsPlugin: NSObject, FlutterPlugin, UINavigationControl
     if let callback = self.result {
         callback(map[result])
     }
-    UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: nil)
+      if let keyWindow = UIApplication.shared.connectedScenes
+          .filter({$0.activationState == .foregroundActive})
+          .compactMap({$0 as? UIWindowScene})
+          .first?.windows
+          .first(where: {$0.isKeyWindow}),
+          let rootViewController = keyWindow.rootViewController {
+          
+          rootViewController.dismiss(animated: true, completion: nil)
+      }
   }
 }
