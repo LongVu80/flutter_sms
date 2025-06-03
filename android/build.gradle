@@ -2,7 +2,7 @@ group 'com.example.flutter_sms'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '2.0.21' // Update if a newer version is available
+    ext.kotlin_version = '2.1.21' // Update if a newer version is available
     repositories {
         google()
         mavenCentral() // Replacing jcenter()
@@ -25,13 +25,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 33 // Update if a newer Android version is available
+    compileSdkVersion 35 // Update if a newer Android version is available
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 23 // Consider raising the minSdkVersion
+        minSdkVersion 24 // Consider raising the minSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
