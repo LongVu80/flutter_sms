@@ -25,7 +25,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace 'com.longvu80.flutter_sms'
+    namespace "com.thienlong14th.whisper_sos"
     compileSdkVersion 35 // Update if a newer Android version is available
 
     sourceSets {
