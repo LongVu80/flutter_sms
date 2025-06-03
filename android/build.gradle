@@ -1,4 +1,4 @@
-group 'com.example.flutter_sms'
+group 'com.LongVu80.flutter_sms'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -25,6 +25,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace 'com.longvu80.flutter_sms'
     compileSdkVersion 35 // Update if a newer Android version is available
 
     sourceSets {
